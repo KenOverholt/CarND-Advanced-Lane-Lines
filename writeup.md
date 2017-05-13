@@ -8,7 +8,7 @@ The goals / steps of this project are the following:
 
 - [x] Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 - [x] Apply a distortion correction to raw images.
-- [ ] Use color transforms, gradients, etc., to create a thresholded binary image.
+- [x] Use color transforms, gradients, etc., to create a thresholded binary image.
 - [ ] Apply a perspective transform to rectify binary image ("birds-eye view").
 - [ ] Detect lane pixels and fit to find the lane boundary.
 - [ ] Determine the curvature of the lane and vehicle position with respect to center.
@@ -20,7 +20,8 @@ The goals / steps of this project are the following:
 [image1a]: ./results/original_checkerboard.jpg "Original"
 [image1b]: ./results/undistorted_checkerboard.jpg "Undistorted"
 [image2]: ./results/test1_undistorted.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
+[image3a]: ./results/thresholding1.jpg "Binary Example"
+[image3b]: ./results/thresholding2.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
@@ -59,9 +60,10 @@ To correct a distorted image, I first read in the image with imread() from matpl
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here are examples of each thresholding method along with an image combining all of them.
 
-![alt text][image3]
+![alt text][image3a]
+![alt text][image3b]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
