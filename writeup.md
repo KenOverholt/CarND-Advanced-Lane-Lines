@@ -9,7 +9,7 @@ The goals / steps of this project are the following:
 - [x] Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 - [x] Apply a distortion correction to raw images.
 - [x] Use color transforms, gradients, etc., to create a thresholded binary image.
-- [ ] Apply a perspective transform to rectify binary image ("birds-eye view").
+- [x] Apply a perspective transform to rectify binary image ("birds-eye view").
 - [ ] Detect lane pixels and fit to find the lane boundary.
 - [ ] Determine the curvature of the lane and vehicle position with respect to center.
 - [ ] Warp the detected lane boundaries back onto the original image.
@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 [image2]: ./results/test1_undistorted.jpg "Road Transformed"
 [image3a]: ./results/thresholding1.jpg "Binary Example"
 [image3b]: ./results/thresholding2.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
+[image4]: ./results/perspective_transform.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
