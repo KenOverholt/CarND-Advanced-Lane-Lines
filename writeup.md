@@ -7,7 +7,7 @@
 The goals / steps of this project are the following:
 
 - [x] Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-- [ ] Apply a distortion correction to raw images.
+- [x] Apply a distortion correction to raw images.
 - [ ] Use color transforms, gradients, etc., to create a thresholded binary image.
 - [ ] Apply a perspective transform to rectify binary image ("birds-eye view").
 - [ ] Detect lane pixels and fit to find the lane boundary.
@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 
 [image1a]: ./results/original_checkerboard.jpg "Original"
 [image1b]: ./results/undistorted_checkerboard.jpg "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
+[image2]: ./results/test1_undistorted.jpg "Road Transformed"
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
@@ -54,7 +54,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+To correct a distorted image, I first read in the image with imread() from matplotlib.image.  Next I use the undistort method from OpenCV2 passing in the distortion coefficients and camera matrix calculated from the camera calibration step above.  Below are the original image and the undistorted image calculated from the undistort method.  
 ![alt text][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
