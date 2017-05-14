@@ -11,7 +11,7 @@ The goals / steps of this project are the following:
 - [x] Use color transforms, gradients, etc., to create a thresholded binary image.
 - [x] Apply a perspective transform to rectify binary image ("birds-eye view").
 - [x] Detect lane pixels and fit to find the lane boundary.
-- [ ] Determine the curvature of the lane and vehicle position with respect to center.
+- [x] Determine the curvature of the lane and vehicle position with respect to center.
 - [ ] Warp the detected lane boundaries back onto the original image.
 - [ ] Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
@@ -103,7 +103,7 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I did this in cell titled "Determine the curvature of the lane and vehicle position with respect to center."
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
