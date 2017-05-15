@@ -44,7 +44,7 @@ You're reading it!
 ### Camera Calibration
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
-Method name: calibrate_camera
+Method name: `calibrate_camera()`
 
 The code for this step is contained in the method calibrate_camera() in the first code cell of the IPython notebook located in "./Advanced Lane Finding.ipynb".  
 
@@ -61,13 +61,13 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 The Jupyter Notebook (./Advanced Lane Finding.ipynb) is structured such that cells should be run in order from top to bottom.  The first cell calibrates the camera.  The next few cells define methods needed by the cells towards the end.  The final two cells create and display a video.  The next cell up creates an image and displays intermediate images created during the process.  The next cell up is called by the video and image creation cells below it.  It calls the cells above it which is where all the image processing is defined. 
 
 #### 1. Provide an example of a distortion-corrected image.
-Method name: correct_distortion
+Method name: `correct_distortion()`
 
 To correct a distorted image, I use the undistort method from OpenCV2 passing in the distortion coefficients and camera matrix calculated from the camera calibration step above.  Below are the original image and the undistorted image calculated from the undistort method.
 ![alt text][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
-Method name: apply_thresholding
+Method name: `apply_thresholding()`
 
 I used a combination of color and gradient thresholds to generate a binary image.  The cell titled "Use color transforms, gradients, etc., to create a thresholded binary image." contains this code.  abs_sobel_thresh is used to apply the sobel method in the x or y direction.  mag_thresh applied a magnitude gradient to the image.  dir_threshold applies a directional threshold.  hsl_S_select applies a threshold on the S channel of an HLS image.  hls_L_select applies a threshold on the L channel of an HLS image.  apply_thresholding combines the various threshold methods to produce one the final thresholding binary image.  Here are examples of each thresholding method along with an image combining all of them.
 
@@ -75,7 +75,7 @@ I used a combination of color and gradient thresholds to generate a binary image
 ![alt text][image3b]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
-Method name: warp
+Method name: `warp()`
 
 The code for my perspective transform includes a function called `warp()`, which appears in the next cell of the IPython notebook.  The `warp()` function takes as input, an image (`img`).  Based on the image's size, it creates source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
@@ -106,19 +106,21 @@ I verified that my perspective transform was working as expected by drawing the 
 ![alt text][image4]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
-Method name: detect_lane_pixels_and_find_lane_boundary
+Method name: `detect_lane_pixels_and_find_lane_boundary()`
 
-The next method in the IPython notebook, detect_lane_pixels_and_find_lane_boundary, detects lane pixels and finds the left and right boundaries.  I fit my lane lines with a 2nd order polynomial kinda like this:
+The next method in the IPython notebook, detect_lane_pixels_and_find_lane_boundary, detects lane pixels and finds the left and right boundaries.  The method takes in the warped image and creates a histogram along the columns of the image.  The two lane lines should be the highest points in the histogram.  The method creates a window around those points and then moves up to the space above that window.  It adjusts to center of that window based on the concentration of points in the area.  In this manner, it moves up the image identifying the points in of each lane.  Lines 86-88 fit the lane lines with a 2nd order polynomial.  Here is a visualization of the completed process:
 
 ![alt text][image5]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+Method name: `determine_curvature_and_position()`
 
-I did this in cell titled "Determine the curvature of the lane and vehicle position with respect to center."
+The next cell, titled "Determine the curvature of the lane and vehicle position with respect to center.", determines the curvature of the line and identifies the vehicle position with respect to the center of the lane.  It takes in the line points (left_fitx and right_fitx) generated from the previous method and uses numpy's `polyfit` to generate lines in real-world space and in meters.  Next it determines car's position between the two lane lines and subtracts the middle of the image from that to determine how far off the car is from the lane center in pixels.  It returns these values to be used by the next method which will display them on the final image using OpenCV's `putText()` method.
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+Method name: `warp_lanes_onto_original_image()`
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+The next IPython cell contains `warp_lanes_onto_original_image()` which takes in the undistorted image drawing a polygon on it which covers the detected lane in front of the car.  The binary_warped images is converted to a color image and the lane drawn on it using OpenCV's `fillPolly()`.  OpenCV's `warpPerspective()` takes Minv (which was generated by 'warp()') to get the lane onto the original image.  Here is an example of my result on a test image:
 
 ![alt text][image6]
 
@@ -127,8 +129,12 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 ### Pipeline (video)
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+`
+The cell titled "Create a video" specifies taken in a video and runs `process_image()` on each frame.  It uses `VideoFileClip()` from moviepy to generate a video.
 
-Here's a [link to my video result](./project_video_result.mp4)
+Here's a [link to my project video result](./project_video_result.mp4)
+
+I also have a link to the challenge video.  The pipeline requires more tweaking to get the challenge video to correctly detect the lane.  Here's a [link to the challenge video result](./challenge_video_result.mp4)
 
 ---
 
