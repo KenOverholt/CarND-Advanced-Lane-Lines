@@ -14,6 +14,7 @@ The goals / steps of this project are the following:
 - [x] Determine the curvature of the lane and vehicle position with respect to center.
 - [x] Warp the detected lane boundaries back onto the original image.
 - [ ] Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+- [x] Create a pipeline for processing a video.
 
 [//]: # (Image References)
 
@@ -25,7 +26,7 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/perspective_transform.jpg "Warp Example"
 [image5]: ./output_images/color_fit_lines.jpg "Fit Visual"
 [image6]: ./output_images/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
+[video1]: ./project_video_result.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
