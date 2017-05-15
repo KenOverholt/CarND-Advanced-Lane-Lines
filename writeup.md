@@ -13,7 +13,7 @@ The goals / steps of this project are the following:
 - [x] Detect lane pixels and fit to find the lane boundary.
 - [x] Determine the curvature of the lane and vehicle position with respect to center.
 - [x] Warp the detected lane boundaries back onto the original image.
-- [ ] Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+- [x] Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 - [x] Create a pipeline for processing a video.
 - [ ] Discuss issues and possible improvements.
 
@@ -44,8 +44,9 @@ You're reading it!
 ### Camera Calibration
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+Method name: calibrate_camera
 
-The code for this step is contained in the first code cell of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the method calibrate_camera() in the first code cell of the IPython notebook located in "./Advanced Lane Finding.ipynb".  
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -53,23 +54,30 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ![alt text][image1a]![alt text][image1b]
 
-### Pipeline (single images)
+### Pipeline
+
+#### 0. Jupyter Structure
+
+The Jupyter Notebook (./Advanced Lane Finding.ipynb) is structured such that cells should be run in order from top to bottom.  The first cell calibrates the camera.  The next few cells define methods needed by the cells towards the end.  The final two cells create and display a video.  The next cell up creates an image and displays intermediate images created during the process.  The next cell up is called by the video and image creation cells below it.  It calls the cells above it which is where all the image processing is defined. 
 
 #### 1. Provide an example of a distortion-corrected image.
+Method name: correct_distortion
 
-To correct a distorted image, I first read in the image with imread() from matplotlib.image.  Next I use the undistort method from OpenCV2 passing in the distortion coefficients and camera matrix calculated from the camera calibration step above.  Below are the original image and the undistorted image calculated from the undistort method.  
+To correct a distorted image, I use the undistort method from OpenCV2 passing in the distortion coefficients and camera matrix calculated from the camera calibration step above.  Below are the original image and the undistorted image calculated from the undistort method.
 ![alt text][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+Method name: apply_thresholding
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here are examples of each thresholding method along with an image combining all of them.
+I used a combination of color and gradient thresholds to generate a binary image.  The cell titled "Use color transforms, gradients, etc., to create a thresholded binary image." contains this code.  abs_sobel_thresh is used to apply the sobel method in the x or y direction.  mag_thresh applied a magnitude gradient to the image.  dir_threshold applies a directional threshold.  hsl_S_select applies a threshold on the S channel of an HLS image.  hls_L_select applies a threshold on the L channel of an HLS image.  apply_thresholding combines the various threshold methods to produce one the final thresholding binary image.  Here are examples of each thresholding method along with an image combining all of them.
 
 ![alt text][image3a]
 ![alt text][image3b]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+Method name: warp
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warp()`, which appears in the next cell of the IPython notebook.  The `warp()` function takes as input, an image (`img`).  Based on the image's size, it creates source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
@@ -98,8 +106,9 @@ I verified that my perspective transform was working as expected by drawing the 
 ![alt text][image4]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+Method name: detect_lane_pixels_and_find_lane_boundary
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+The next method in the IPython notebook, detect_lane_pixels_and_find_lane_boundary, detects lane pixels and finds the left and right boundaries.  I fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
