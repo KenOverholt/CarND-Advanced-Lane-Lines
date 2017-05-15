@@ -12,19 +12,19 @@ The goals / steps of this project are the following:
 - [x] Apply a perspective transform to rectify binary image ("birds-eye view").
 - [x] Detect lane pixels and fit to find the lane boundary.
 - [x] Determine the curvature of the lane and vehicle position with respect to center.
-- [ ] Warp the detected lane boundaries back onto the original image.
+- [x] Warp the detected lane boundaries back onto the original image.
 - [ ] Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
 [//]: # (Image References)
 
-[image1a]: ./results/original_checkerboard.jpg "Original"
-[image1b]: ./results/undistorted_checkerboard.jpg "Undistorted"
-[image2]: ./results/test1_undistorted.jpg "Road Transformed"
-[image3a]: ./results/thresholding1.jpg "Binary Example"
-[image3b]: ./results/thresholding2.jpg "Binary Example"
-[image4]: ./results/perspective_transform.jpg "Warp Example"
-[image5]: ./results/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image1a]: ./output_images/original_checkerboard.jpg "Original"
+[image1b]: ./output_images/undistorted_checkerboard.jpg "Undistorted"
+[image2]: ./output_images/test1_undistorted.jpg "Road Transformed"
+[image3a]: ./output_images/thresholding1.jpg "Binary Example"
+[image3b]: ./output_images/thresholding2.jpg "Binary Example"
+[image4]: ./output_images/perspective_transform.jpg "Warp Example"
+[image5]: ./output_images/color_fit_lines.jpg "Fit Visual"
+[image6]: ./output_images/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
