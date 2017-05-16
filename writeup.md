@@ -27,6 +27,7 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/perspective_transform.jpg "Warp Example"
 [image5]: ./output_images/color_fit_lines.jpg "Fit Visual"
 [image6]: ./output_images/example_output.jpg "Output"
+[video2]: ./output_images/improvement.jpg "Improvement"
 [video1]: ./project_video_result.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -127,6 +128,10 @@ Additionally, the method determines the car's position between the two lane line
 Here is an example of my result on a test image:
 
 ![alt text][image6]
+
+In order to improve the quality of the lane polygons, this method stores the current polygon in a global variable which is then used when processing the next frame.  At that time, the method uses OpenCV's `matchShapes()` to compare the two polygons.  If the current frame's polygon has too large of a change from the last, it rejects the new lane and used the old one.  Here's an example of how this has improved the video.
+
+![alt text][video2]
 
 #### 7. Putting it all together
 Method name: `process_image()`
