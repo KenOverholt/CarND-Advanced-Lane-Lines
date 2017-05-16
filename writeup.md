@@ -124,17 +124,22 @@ The next IPython cell contains `warp_lanes_onto_original_image()` which takes in
 
 ![alt text][image6]
 
+#### 7. Putting it all together
+Method name: `process_image()`
+
+The `process_image()` method calls each of the previous methods, in turn, to find the lane and draw it on the image.  The same pipeline is used whether prcessing an stand-alone image or a frame of a video.  A flag is passed in to identify which type of processing so the pipeline can be customized.  For example, intermediate images are generated for the stand-alone image while it would be unrealistic to display all the intermediate images for each frame of a video so those are suppressed.  This could also be used in enhancements to project which might process frames based on some values from the previous frame whereas a stand-alone image couldn't use that enhanced processing.
+
+The "Create a single image" cell reads in a single image using matplotlib's `imread()` and calls `process_image()` to find and display the lane on it.  It also generates the intermediate images seen throughout this writeup.
+
 ---
 
 ### Pipeline (video)
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
-`
-The cell titled "Create a video" specifies taken in a video and runs `process_image()` on each frame.  It uses `VideoFileClip()` from moviepy to generate a video.
+
+The cell titled "Create a video" takes in a video and runs `process_image()` on each frame.  It uses `VideoFileClip()` from moviepy to generate a video overlayed with the lane image.
 
 Here's a [link to my project video result](./project_video_result.mp4)
-
-I also have a link to the challenge video.  The pipeline requires more tweaking to get the challenge video to correctly detect the lane.  Here's a [link to the challenge video result](./challenge_video_result.mp4)
 
 ---
 
@@ -142,4 +147,10 @@ I also have a link to the challenge video.  The pipeline requires more tweaking 
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+To improve lane detection, I experimented with different gradient values and thresholds for the L and S detectors.  I also tried different methods of combining them and ended up the valued and methods provided in my code.  It runs reasonable well on a relatively clean road but goes astray with heavy shadows.  You can see it start to stray in the project video but it quickly recovers even on a road surface that is a lighter color than the previous section of the road.
+
+For next steps in improving the project, I would implement memory from frame-to-frame.  Maintaining recent history of values for key elements like lane points could help identify when shadows start washing out lane markings or when bright sun reduces differences in lane markings and the road surface. 
+
+I have a link to the challenge video.  The pipeline requires more tweaking to get the challenge video to correctly detect the lane but here's the [link anyway](./challenge_video_result.mp4).  You can see it has difficulty when the left lane line gets close to the wall and its shadow.  The lack of separation fools the detector into thinking the lane line is wider than it actually is.  Narrowing the sliding window width might improve that bit.
+
+The challenge video also starts losing the lane when the road surface color slowly darkens away from the line.  However, it does recognize what is happening and gets back on course.  But that still needs improvement.
